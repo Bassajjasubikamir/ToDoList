@@ -1,61 +1,38 @@
 const addButton = document.querySelector('.addButton')
-var inputValue = document.querySelector('.input')
+const inputValue = document.querySelector('.input')
 const container = document.querySelector('.container')
+const  form = document.querySelector('.input_div')
 
-class item{
-    constructor(itemName){
-        this.createDiv(itemName);
+
+
+form.addEventListener('submit',function(event){
+    event.preventDefault()
+
+    if (!inputValue.value){
+        alert('please fill this input field')
+        return
     }
 
-    createDiv(itemName){
-        let input = document.createElement('input');
-        input.value = itemName;
-        input.disabled = true;
-        input.classList.add('item_input');
-        input.type = "text";
+    let div = document.createElement('div')
+    div.classList.add('item')
 
-        let itemBox = doccument.createElement('div');
-        itemBox.classList.add('item')
+    let h1 = document.createElement('h1')
+    h1.classList.add('h1')
+    h1.innerText = inputValue.value
+    div.appendChild(h1)
 
-        let editButton = doccuent.createElement('button');
-        editButton.innerHTML="EDIT";
-        editButton.classList.add('editButton');
+    let editBtn = document.createElement('button')
+    editBtn.innerHTML = 'EDIT'
+    editBtn.classList.add('editButton')
 
-        let removeButton = doccuent.createElement('button');
-        removeButton  .innerHTML= "REMOVE";
-        removeButton.classList.add('removeButton');
- 
-        container.appendChild(itemBox);
+    let removeBtn = document.createElement('button')
+    removeBtn.innerText = 'REMOVE'
+    removeBtn.classList.add('removeButton')
 
-        itemBox.appendChild(input);
-        itemBox.appendChild(editButton);
-        itemBox.appendChild(removeButton);
+    div.append(editBtn, removeBtn)
 
-        editButton.addEventListener('click', () => this.edit(input));
-
-        removeButton.addEventListener('click', () => this.remove(itemBox));
-   }
-
-   edit(input){
-        input.disabled = !input.disabled;
-   }
-
-   remove(item){
-    container.removeChild(item);
-   }
-}
-
-function check(){
-    if(click.value !=""){
-        new item(input.value);
-        input.value = "";
-    }
-}
-
-addButton.addEventListener('click', check);
-window.addEventListener('keydown',(e) =>{
-    if(e.which ==13){
-        check();
-    }
+    container.append(div)
+  
+    
+    inputValue.value = ''
 })
-
